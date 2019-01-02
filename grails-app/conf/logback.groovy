@@ -35,5 +35,5 @@ if (Environment.isDevelopmentMode() && targetDir != null) {
 }
 root(ERROR, ['STDOUT'])
 
-
+logger "com.example", DEBUG
 logger "neo4j", DEBUG

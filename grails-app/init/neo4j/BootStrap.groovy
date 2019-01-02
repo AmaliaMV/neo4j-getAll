@@ -21,20 +21,22 @@ class BootStrap {
 
                 Person person
 
-                (1..40000).each { num ->
-                    person = new Person(name: "person-${num}",
-                                        lastName: "lastName-${num}",
-                                        birthDate: new Date(),
-                                        contactInformation: new ContactInformation(
-                                            email: "mail-${num}@mail.com",
-                                            phoneNumber: "+5491156${num}"))
-                    person.updatedBy = user
-                    person.save()
+                if (Person.count() < 40000) {
+                    (1..40000).each { num ->
+                        person = new Person(name: "person-${num}",
+                                            lastName: "lastName-${num}",
+                                            birthDate: new Date(),
+                                            contactInformation: new ContactInformation(
+                                                email: "mail-${num}@mail.com",
+                                                phoneNumber: "+5491156${num}"))
+                        person.updatedBy = user
+                        person.save()
 
-                    log.debug("persona ${person.name} creada - id ${person.id}")
+                        log.debug("persona ${person.name} creada - id ${person.id}")
 
-                    if (num % 1000) {
-                        session.flush()
+                        if (num % 1000) {
+                            session.flush()
+                        }
                     }
                 }
             }
