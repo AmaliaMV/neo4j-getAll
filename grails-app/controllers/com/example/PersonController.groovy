@@ -9,9 +9,9 @@ class PersonController {
 
     def index() {
     log.info("Executing index controller ...")
-        StatementResult result = Person.executeCypher("MATCH (n:test_Person) RETURN n.id as id")
+        StatementResult result = Person.executeCypher("MATCH (n:test_Person) RETURN ID(n) as id LIMIT ${Person.TOTAL}")
 
-        List ids = new ArrayList<>(40000)
+        List ids = new ArrayList<>(Person.TOTAL)
 
         while (result.hasNext()) {
             Long id = result.next().get("id").asLong()

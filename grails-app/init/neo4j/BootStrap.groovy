@@ -21,8 +21,8 @@ class BootStrap {
 
                 Person person
 
-                if (Person.count() < 40000) {
-                    (1..40000).each { num ->
+                if (Person.count() < Person.TOTAL) {
+                    (1..Person.TOTAL).each { num ->
                         person = new Person(name: "person-${num}",
                                             lastName: "lastName-${num}",
                                             birthDate: new Date(),
@@ -34,7 +34,7 @@ class BootStrap {
 
                         log.debug("persona ${person.name} creada - id ${person.id}")
 
-                        if (num % 1000) {
+                        if (num % 5 == 0) {
                             session.flush()
                         }
                     }
